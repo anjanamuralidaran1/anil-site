@@ -1,0 +1,655 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>For Anil 🤍</title>
+  <meta name="description" content="A soft little comfort page from Smalls." />
+
+  <style>
+    :root{
+      --text:#ECF3FF;
+      --muted: rgba(236,243,255,.78);
+      --border: rgba(255,255,255,.14);
+      --card: rgba(255,255,255,.08);
+      --accent:#7C5CFF;
+      --accent2:#26E6C9;
+      --shadow: 0 18px 55px rgba(0,0,0,.42);
+      --radius2: 26px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: var(--sans);
+      color:var(--text);
+      overflow-x:hidden;
+
+      /* Dark-but-not-gloomy: “night hike” vibe + subtle aurora */
+      background:
+        radial-gradient(1000px 520px at 20% 10%, rgba(124,92,255,.22), transparent 55%),
+        radial-gradient(900px 520px at 78% 22%, rgba(38,230,201,.16), transparent 55%),
+        radial-gradient(700px 420px at 60% 90%, rgba(255,211,110,.10), transparent 60%),
+        linear-gradient(180deg, #050812, #08122A 40%, #060A16 100%);
+    }
+
+    /* Stars (subtle) */
+    .stars{
+      pointer-events:none;
+      position:fixed; inset:0;
+      background-image:
+        radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,.45) 50%, transparent 52%),
+        radial-gradient(1px 1px at 30% 70%, rgba(255,255,255,.35) 50%, transparent 52%),
+        radial-gradient(1px 1px at 55% 35%, rgba(255,255,255,.40) 50%, transparent 52%),
+        radial-gradient(1px 1px at 80% 55%, rgba(255,255,255,.30) 50%, transparent 52%),
+        radial-gradient(1px 1px at 90% 15%, rgba(255,255,255,.28) 50%, transparent 52%),
+        radial-gradient(1px 1px at 15% 85%, rgba(255,255,255,.25) 50%, transparent 52%);
+      opacity:.35;
+      animation: twinkle 10s ease-in-out infinite;
+    }
+    @keyframes twinkle{
+      0%,100%{opacity:.30}
+      50%{opacity:.42}
+    }
+
+    /* Catan-ish hex grid overlay (very subtle) */
+    .hex{
+      pointer-events:none;
+      position:fixed; inset:-10%;
+      background:
+        linear-gradient(30deg, rgba(255,255,255,.05) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,.05) 87.5%, rgba(255,255,255,.05)),
+        linear-gradient(150deg, rgba(255,255,255,.05) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,.05) 87.5%, rgba(255,255,255,.05)),
+        linear-gradient(90deg, rgba(255,255,255,.04) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,.04) 87.5%, rgba(255,255,255,.04));
+      background-size: 64px 110px;
+      opacity:.12;
+      filter: blur(.2px);
+      transform: translateZ(0);
+      animation: drift 18s linear infinite;
+    }
+    @keyframes drift{
+      0%{transform:translate3d(-1%, -1%, 0)}
+      100%{transform:translate3d(1%, 1%, 0)}
+    }
+
+    /* Soft ridge silhouette bottom */
+    .ridge{
+      pointer-events:none;
+      position:fixed; left:0; right:0; bottom:-1px;
+      height: 220px;
+      background:
+        radial-gradient(260px 130px at 10% 100%, rgba(0,0,0,.55) 60%, transparent 62%),
+        radial-gradient(280px 150px at 25% 100%, rgba(0,0,0,.58) 60%, transparent 62%),
+        radial-gradient(320px 160px at 45% 100%, rgba(0,0,0,.62) 60%, transparent 62%),
+        radial-gradient(300px 150px at 65% 100%, rgba(0,0,0,.56) 60%, transparent 62%),
+        radial-gradient(280px 140px at 85% 100%, rgba(0,0,0,.60) 60%, transparent 62%),
+        linear-gradient(180deg, transparent, rgba(0,0,0,.55));
+      opacity:.55;
+    }
+
+    .wrap{max-width:1100px;margin:0 auto;padding:28px 18px 80px;position:relative;}
+    header{display:flex;gap:18px;align-items:flex-start;justify-content:space-between;margin-bottom:18px;}
+    .brand{display:flex;gap:14px;align-items:center;}
+    .logo{
+      width:44px;height:44px;border-radius:14px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.28), transparent 45%),
+        linear-gradient(135deg, rgba(124,92,255,.92), rgba(38,230,201,.82));
+      box-shadow: var(--shadow);
+      position:relative;
+    }
+    .logo:after{
+      content:"";position:absolute;inset:10px;border-radius:12px;
+      background: rgba(0,0,0,.20);
+      border: 1px solid rgba(255,255,255,.16);
+    }
+    .title h1{margin:0;font-size:clamp(22px,3.2vw,34px);letter-spacing:.3px;line-height:1.08;}
+    .title p{margin:6px 0 0;color:var(--muted);max-width:68ch;font-size:14.5px;line-height:1.45;}
+
+    .pillrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;}
+    .pill{
+      font-size:12.5px;padding:7px 10px;border-radius:999px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      color: rgba(236,243,255,.86);
+      backdrop-filter: blur(10px);
+    }
+
+    .grid{display:grid;grid-template-columns:1.2fr .8fr;gap:16px;margin-top:16px;}
+    @media (max-width: 920px){.grid{grid-template-columns:1fr;} header{flex-direction:column;align-items:flex-start;}}
+
+    .card{
+      background: linear-gradient(180deg, var(--card), rgba(255,255,255,.06));
+      border: 1px solid var(--border);
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+      backdrop-filter: blur(10px);
+    }
+    .inner{padding:18px 18px 16px;}
+    .card h2{margin:0 0 8px;font-size:16.5px;letter-spacing:.2px;}
+    .card p{margin:8px 0;color:var(--muted);font-size:14.5px;line-height:1.45;}
+    .divider{height:1px;background:rgba(255,255,255,.10);margin:14px 0;}
+
+    .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;}
+    button{
+      cursor:pointer;border:1px solid rgba(255,255,255,.16);
+      color: rgba(236,243,255,.92);
+      background: rgba(255,255,255,.08);
+      padding:10px 12px;border-radius:14px;font-weight:700;letter-spacing:.2px;
+      transition: transform .08s ease, background .15s ease, border-color .15s ease;
+      user-select:none;
+    }
+    button:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.22);}
+    button:active{transform:translateY(1px) scale(.99);}
+    .primary{
+      background: linear-gradient(135deg, rgba(124,92,255,.92), rgba(38,230,201,.78));
+      border-color: rgba(255,255,255,.20);
+      color:#071022;
+    }
+
+    .quoteBox{
+      padding:14px;border-radius:18px;background:rgba(0,0,0,.18);
+      border:1px solid rgba(255,255,255,.12);
+    }
+    .quoteText{font-size:15px;color:rgba(236,243,255,.95);}
+    .quoteMeta{margin-top:8px;font-size:12.5px;color:rgba(236,243,255,.70);}
+
+    .breath{
+      display:flex;gap:14px;align-items:center;
+      padding:14px;border-radius:18px;background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.12);margin-top:12px;
+    }
+    .orb{
+      width:56px;height:56px;border-radius:999px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.28), transparent 45%),
+        radial-gradient(circle at 55% 60%, rgba(38,230,201,.55), transparent 55%),
+        radial-gradient(circle at 50% 50%, rgba(124,92,255,.65), rgba(124,92,255,.12) 55%, transparent 66%);
+      box-shadow: 0 0 0 1px rgba(255,255,255,.12), 0 18px 40px rgba(0,0,0,.38);
+      transform-origin:center;
+    }
+    .orb.breathe{animation:breathe 8s ease-in-out infinite;}
+    @keyframes breathe{
+      0%{transform:scale(.92);filter:brightness(.95);}
+      25%{transform:scale(1.05);filter:brightness(1.05);}
+      55%{transform:scale(1.05);filter:brightness(1.05);}
+      100%{transform:scale(.92);filter:brightness(.95);}
+    }
+    .breathText{flex:1;}
+    .breathText .small{font-size:12.5px;color:rgba(236,243,255,.72);}
+
+    .miniGrid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:12px;}
+    .mini{
+      padding:14px;border-radius:18px;background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.12);
+    }
+    .mini h3{margin:0 0 8px;font-size:14.5px;letter-spacing:.2px;}
+    .out{
+      font-family: var(--mono);
+      font-size: 13.5px;
+      color: rgba(236,243,255,.85);
+      background: rgba(0,0,0,.22);
+      border: 1px solid rgba(255,255,255,.10);
+      padding: 10px;
+      border-radius: 14px;
+      min-height: 46px;
+      white-space: pre-wrap;
+    }
+
+    .progressWrap{display:flex;align-items:center;gap:10px;margin-top:10px;}
+    .bar{flex:1;height:12px;border-radius:999px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.12);overflow:hidden;}
+    .fill{height:100%;width:42%;background: linear-gradient(90deg, rgba(124,92,255,.92), rgba(38,230,201,.86));}
+    .tag{
+      font-size:12px;padding:4px 8px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.07);
+      color: rgba(236,243,255,.84);
+      white-space:nowrap;
+    }
+
+    footer{margin-top:18px;color:rgba(236,243,255,.62);font-size:12.5px;text-align:center;}
+    .tiny{font-size:12.5px;color:rgba(236,243,255,.62);}
+  </style>
+</head>
+
+<body>
+  <div class="stars" aria-hidden="true"></div>
+  <div class="hex" aria-hidden="true"></div>
+  <div class="ridge" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div class="title">
+          <h1>Hey Anil — Smalls built you a pause button 🤍</h1>
+          <p>
+            Not a pep talk. Not a “fix.” Just a small, calm corner for when your brain is running
+            12 tabs and one of them is playing emotional audio at full volume.
+          </p>
+        </div>
+      </div>
+
+      <div class="pillrow" style="justify-content:flex-end;">
+        <div class="pill" id="todayPill">Loading…</div>
+        <div class="pill" id="timePill">Loading…</div>
+      </div>
+    </header>
+
+    <div class="grid">
+      <!-- LEFT -->
+      <section class="card" aria-label="Comfort and encouragement">
+        <div class="inner">
+          <h2>For the heavy bits</h2>
+          <p id="introLine">
+            If today feels like it’s dragging: you’re not “behind.” You’re just in a tougher scene.
+            (And yes, we’re allowed to take a break between takes.)
+          </p>
+
+          <div class="quoteBox" role="status" aria-live="polite">
+            <div class="quoteText" id="quoteText">Tap “Smalls says…”</div>
+            <div class="quoteMeta" id="quoteMeta"></div>
+          </div>
+
+          <div class="btnrow">
+            <button class="primary" id="btnGentle">Smalls says…</button>
+            <button id="btnBrain">Neuro / philosophy comfort</button>
+          </div>
+
+          <div class="breath" aria-label="Breathing exercise">
+            <div class="orb" id="orb" aria-hidden="true"></div>
+            <div class="breathText">
+              <div style="font-weight:800;">30-second reset</div>
+              <div class="small" id="breathLabel">Press start. Inhale… exhale… no “performing okay” required.</div>
+              <div class="btnrow" style="margin-top:10px;">
+                <button id="btnBreath">Start</button>
+                <button id="btnStopBreath">Stop</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <h2>Distraction, but tasteful</h2>
+          <p>Little boosts that don’t demand energy you don’t have.</p>
+
+          <div class="miniGrid">
+            <div class="mini">
+              <h3>🌮 Taco Bell x Chipotle peace treaty</h3>
+              <div class="out" id="foodOut">Click for a tiny “you got this” + food joke.</div>
+              <div class="btnrow">
+                <button id="btnFood">Give me one</button>
+              </div>
+              <div class="tiny" style="margin-top:8px;">(We can love tacos and still respect burrito bowls. Growth.)</div>
+            </div>
+
+            <div class="mini">
+              <h3>🎲 Catan roll (because sometimes you just need an 8)</h3>
+              <div class="out" id="catanOut">Roll for luck. No robber energy, please.</div>
+              <div class="btnrow">
+                <button id="btnRoll">Roll 2d6</button>
+                <button id="btnCatanTip">Catan tip</button>
+              </div>
+            </div>
+
+            <div class="mini">
+              <h3>🏆 Pokémon ranked mindset</h3>
+              <p style="margin:0;color:rgba(236,243,255,.72);font-size:13px;">
+                The win condition today is: calm decisions + being kind to yourself.
+              </p>
+              <div class="progressWrap">
+                <div class="bar" aria-hidden="true"><div class="fill" id="rankFill"></div></div>
+                <span class="tag" id="rankTag">Focus: Clean plays</span>
+              </div>
+              <div class="out" id="pokeOut" style="margin-top:10px;">Tap “Next match mindset.”</div>
+              <div class="btnrow">
+                <button id="btnPoke">Next match mindset</button>
+                <button id="btnReset">Reset gently</button>
+              </div>
+            </div>
+
+            <div class="mini">
+              <h3>🎧 Mixing / 🕺 Bhangra switch</h3>
+              <div class="out" id="musicOut">Pick a vibe. No audio here — just prompts to get your brain unstuck.</div>
+              <div class="btnrow">
+                <button id="btnMix">Studio prompt</button>
+                <button id="btnBhangra">Bhangra boost</button>
+                <button id="btnDallas">Dallas night scene</button>
+              </div>
+              <div class="tiny" style="margin-top:8px;">(If you read this in our fake accent: respectfully, stop. 😂)</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT -->
+      <aside class="card" aria-label="Cinema corner">
+        <div class="inner">
+          <h2>Cinema corner 🎬</h2>
+          <p>
+            For when you want to feel like a creator again — even if it’s just for 20 seconds.
+            Classic-film soul + director brain + a little hero energy.
+          </p>
+
+          <div class="mini">
+            <h3>⚡ “Hero entry” scene prompt</h3>
+            <div class="out" id="sceneOut">Tap “Generate.” (No cringe. Promise.)</div>
+            <div class="btnrow">
+              <button class="primary" id="btnScene">Generate</button>
+              <button id="btnShot">Add a shot list</button>
+            </div>
+            <div class="tiny" style="margin-top:8px;">
+              Subtext: strength isn’t volume. It’s consistency. (Very Karna-coded.)
+            </div>
+          </div>
+
+          <div class="mini" style="margin-top:12px;">
+            <h3>📜 Vedic / philosophy (soft, not lecture-y)</h3>
+            <div class="out" id="sanskritOut">
+धीरेण सर्वं साध्यते।
+Slowly, everything gets done.
+            </div>
+            <div class="btnrow">
+              <button id="btnSanskrit">Another line</button>
+              <button id="btnMeaning">Why this helps</button>
+            </div>
+          </div>
+
+          <div class="mini" style="margin-top:12px;">
+            <h3>📝 A note from Smalls</h3>
+            <div class="out" id="noteOut"></div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="mini">
+            <h3>🫶 One tiny roast (because you’d do it to me)</h3>
+            <div class="out" id="roastOut">Tap if you want a harmless roast.</div>
+            <div class="btnrow">
+              <button id="btnRoast">Roast me (gently)</button>
+              <button id="btnVijay">Roast Vijay-love</button>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      Built with care by Smalls. If this made you exhale even a little — that counts. 🤍
+    </footer>
+  </div>
+
+  <script>
+    // Time pills
+    function updateTimePills(){
+      const now = new Date();
+      const opts = { weekday:"long", year:"numeric", month:"long", day:"numeric" };
+      document.getElementById("todayPill").textContent = now.toLocaleDateString(undefined, opts);
+      document.getElementById("timePill").textContent =
+        "Your local time: " + now.toLocaleTimeString(undefined, {hour:"2-digit", minute:"2-digit"});
+    }
+    updateTimePills();
+    setInterval(updateTimePills, 15000);
+
+    // Personal note
+    const NOTE_TEXT =
+`Anil —
+
+I know it’s been a lot lately. I’m not going to try to “fix” it with words.
+I just want you to know I’m here — genuinely.
+
+If you want company, I’m here.
+If you want distraction, I’m here.
+If you want silence but not alone, I’m still here.
+
+Also: you’re not allowed to disappear into your thoughts like a moody auteur.
+Smalls will show up with snacks and ruin that plan.
+
+One scene at a time.
+— Smalls 🤍`;
+
+    document.getElementById("noteOut").textContent = NOTE_TEXT;
+
+    function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+
+    // Gentle lines
+    const gentle = [
+      {t:"You’re not behind. You’re just buffering. (It happens to the best devices.)", m:"Smalls logic"},
+      {t:"If you can only do 5% today — do 5%. That’s still showing up.", m:"No drama, just truth"},
+      {t:"You don’t need a breakthrough. You need a breath. Then the next one.", m:"Tiny wins"},
+      {t:"Bad days don’t cancel out who you are. They’re just bad days.", m:"Still you"},
+      {t:"Let today be the “quiet scene” that makes the next one hit harder.", m:"Director brain"},
+      {t:"If your brain is roasting you, remember: it’s not a reliable narrator.", m:"Facts only"},
+      {t:"You’re allowed to rest without earning it. I said what I said.", m:"Permission slip"},
+    ];
+
+    // Neuro / philosophy comfort
+    const brain = [
+      {t:"Your nervous system isn’t being ‘dramatic.’ It’s trying to protect you. We can thank it… and still take the wheel back.", m:"Neuro-friendly"},
+      {t:"Thoughts are just events, not commandments. You can notice them and not obey them.", m:"Philosophy-lite"},
+      {t:"If you can name it, you can soften it. ‘This is stress.’ ‘This is grief.’ Naming is power.", m:"Grounding"},
+      {t:"Brains love certainty — life rarely offers it. So we do the next right thing, not the whole plan.", m:"One step"},
+      {t:"You’ve studied deep things. Let that wisdom be gentle on you too.", m:"Turn it inward kindly"},
+    ];
+
+    function setQuote(item){
+      document.getElementById("quoteText").textContent = item.t;
+      document.getElementById("quoteMeta").textContent = item.m || "";
+    }
+
+    document.getElementById("btnGentle").addEventListener("click", ()=> setQuote(pick(gentle)));
+    document.getElementById("btnBrain").addEventListener("click", ()=> setQuote(pick(brain)));
+
+    // Breathing
+    const orb = document.getElementById("orb");
+    const breathLabel = document.getElementById("breathLabel");
+    let breathTimer = null;
+
+    document.getElementById("btnBreath").addEventListener("click", ()=>{
+      orb.classList.add("breathe");
+      breathLabel.textContent = "Inhale… (4)  Hold… (2)  Exhale… (6)  Repeat.";
+      if (breathTimer) clearTimeout(breathTimer);
+      breathTimer = setTimeout(()=>{
+        orb.classList.remove("breathe");
+        breathLabel.textContent = "Nice. That counts. Want another round?";
+      }, 32000);
+    });
+
+    document.getElementById("btnStopBreath").addEventListener("click", ()=>{
+      orb.classList.remove("breathe");
+      if (breathTimer) clearTimeout(breathTimer);
+      breathLabel.textContent = "Stopped. You’re still doing enough.";
+    });
+
+    // Food jokes
+    const food = [
+      "Reminder: you can feel sad AND still deserve a Crunchwrap. Two truths can coexist.",
+      "Chipotle bowl + Taco Bell drink = balance. Aristotle would be proud.",
+      "If today is hard, we don’t problem-solve. We soft-reset. Preferably with tacos.",
+      "Your feelings are valid. Also: Baja Blast would fix at least 3% of this. (Scientific.)",
+      "If life is giving ‘mid,’ we respond with queso. That’s the strategy.",
+    ];
+    document.getElementById("btnFood").addEventListener("click", ()=>{
+      document.getElementById("foodOut").textContent = pick(food);
+    });
+
+    // Catan tips
+    const catanTips = [
+      "Early game: diversify numbers/resources. Don’t build a one-resource personality.",
+      "Ports are underrated. A good port is basically ‘I make my own luck.’",
+      "Trade clean: short asks, clear offers. People trade more when it’s easy.",
+      "Robber politics: don’t become the villain unless you’re ready for the sequel.",
+      "If you’re behind: play for tempo. Fast turns + smart trades can swing games."
+    ];
+
+    document.getElementById("btnRoll").addEventListener("click", ()=>{
+      const d1 = 1 + Math.floor(Math.random()*6);
+      const d2 = 1 + Math.floor(Math.random()*6);
+      const sum = d1 + d2;
+      const map = {
+        2:"Snake eyes… but you’re still in the game.",
+        3:"Okay, we build patience.",
+        4:"Steady. Brick/wood believers rise.",
+        5:"Nice. Trade vibes.",
+        6:"We love a 6.",
+        7:"Robber time — be kind, be strategic 😅",
+        8:"Iconic. We take that.",
+        9:"Solid.",
+        10:"Big turn energy.",
+        11:"Rare-ish. Enjoy it.",
+        12:"YOOOOOO. That’s a sign. ✨"
+      };
+      document.getElementById("catanOut").textContent =
+        `Rolled: ${d1} + ${d2} = ${sum}\n${map[sum] || ""}`;
+    });
+    document.getElementById("btnCatanTip").addEventListener("click", ()=>{
+      document.getElementById("catanOut").textContent = pick(catanTips);
+    });
+
+    // Pokémon mindsets
+    const pokeMindsets = [
+      {t:"One match = one data point. Play the set, not the moment.", tag:"Long game"},
+      {t:"Before you click: ask ‘What do they want?’ Then click second.", tag:"Mind-read"},
+      {t:"Tilt check: unclench jaw, relax shoulders, one deep breath.", tag:"Reset"},
+      {t:"Play for odds, not ego. Safe lines are still skill.", tag:"Clean"},
+      {t:"If you misplay: note it, forgive it, next turn = new universe.", tag:"Recovery"},
+    ];
+    let rankPct = 42;
+    function setRank(tag, pct, line){
+      document.getElementById("rankTag").textContent = "Focus: " + tag;
+      document.getElementById("rankFill").style.width = pct + "%";
+      document.getElementById("pokeOut").textContent = line;
+    }
+    document.getElementById("btnPoke").addEventListener("click", ()=>{
+      const m = pick(pokeMindsets);
+      rankPct = Math.min(90, rankPct + (8 + Math.floor(Math.random()*8)));
+      setRank(m.tag, rankPct, m.t);
+    });
+    document.getElementById("btnReset").addEventListener("click", ()=>{
+      rankPct = 42;
+      setRank("Clean plays", rankPct, "Reset complete. Next match: breathe, then play one turn at a time.");
+    });
+
+    // Music / bhangra / Dallas prompts
+    const mixPrompts = [
+      "Studio prompt: take an old classic vibe + a modern drum pocket. Let the hook breathe — don’t over-polish.",
+      "Director cut: remove 20% of layers. Space is an instrument.",
+      "Make a ‘nostalgia-to-now’ transition: warm intro → crisp drop, like a gentle time jump.",
+      "Add one signature motif that returns like a character theme.",
+      "If it’s not flowing: loop 8 bars and change only ONE thing. Tiny edits = big results."
+    ];
+    const bhangraBoost = [
+      "2 minutes: bounce step + shoulders. No mirror. Just energy.",
+      "8 counts light, 8 counts strong. Repeat 4 times. That’s a reset.",
+      "If you can’t move much: clap on 2 & 4 and nod. Rhythm still counts.",
+      "Confidence hack: simple move, clean timing, relaxed face. Done."
+    ];
+    const dallasScenes = [
+      "Dallas night: skyline glow, quiet playlist, windows down a little. No rush.",
+      "Late coffee run: neon signs + that ‘new take, new day’ feeling.",
+      "Streetlights walk: you don’t need answers — just motion.",
+      "Studio after-hours: one lamp, one loop, one honest idea."
+    ];
+
+    document.getElementById("btnMix").addEventListener("click", ()=>{
+      document.getElementById("musicOut").textContent = pick(mixPrompts);
+    });
+    document.getElementById("btnBhangra").addEventListener("click", ()=>{
+      document.getElementById("musicOut").textContent = pick(bhangraBoost);
+    });
+    document.getElementById("btnDallas").addEventListener("click", ()=>{
+      document.getElementById("musicOut").textContent = pick(dallasScenes);
+    });
+
+    // Scene generator
+    const heroSetups = [
+      "A rainy Dallas street outside a small tea/coffee spot.",
+      "Backstage at a venue — cables, sweat, neon reflections.",
+      "A quiet room with storyboards and pages marked ‘rewrite.’",
+      "A Catan game mid-argument that turns into real honesty.",
+      "A late-night drive where the city looks like a long exposure."
+    ];
+    const heroMoments = [
+      "The ‘entry’ isn’t loud — it’s turning back to help someone.",
+      "They arrive tired… and still choose dignity. Very Karna-coded.",
+      "A calm line lands harder than a speech ever could.",
+      "The camera stays wide. Power doesn’t need close-ups.",
+      "They don’t win by force — they win by showing up."
+    ];
+    const heroLines = [
+      "“Nenu strong ani prove cheyyanu… nenu present ga unta.”",
+      "“Okkasari breathe cheyyi. Tarvata decide avdam.”",
+      "“Naaku show kaadu… responsibility.”",
+      "“Story aagadu. Scene matrame slow.”",
+      "“Nuvvu okkadive kaadu, Anil.”"
+    ];
+    const shotLists = [
+      "1) Wide establishing\n2) Slow push-in\n3) Cutaway: hands\n4) Reaction close-up\n5) Hold 2 extra seconds (let it breathe)",
+      "1) Over-the-shoulder\n2) Match cut on movement\n3) Insert: small object\n4) Gentle reveal\n5) End on ambient sound",
+      "1) Static frame\n2) Subject crosses foreground\n3) Rack focus\n4) Close-up on eyes\n5) Fade with city noise"
+    ];
+
+    document.getElementById("btnScene").addEventListener("click", ()=>{
+      const setup = pick(heroSetups);
+      const moment = pick(heroMoments);
+      const line = pick(heroLines);
+      document.getElementById("sceneOut").textContent =
+`SETUP: ${setup}
+MOMENT: ${moment}
+LINE (optional): ${line}
+
+Tone: classic-film calm. Strength = quiet consistency.`;
+    });
+
+    document.getElementById("btnShot").addEventListener("click", ()=>{
+      document.getElementById("sceneOut").textContent += "\n\nSHOT LIST:\n" + pick(shotLists);
+    });
+
+    // Sanskrit/philosophy lines
+    const sanskritLines = [
+      {s:"धीरेण सर्वं साध्यते।", e:"Slowly, everything gets done."},
+      {s:"शान्तिः अन्तः आरभ्यते।", e:"Peace begins inside."},
+      {s:"प्रयत्नः एव विजयः।", e:"Effort itself is victory."},
+      {s:"स्वस्थः भव।", e:"Be well."},
+      {s:"असक्तः कर्म समाचर।", e:"Do the work without clinging."}
+    ];
+    const sanskritMeaning = [
+      "It’s not ‘be positive.’ It’s ‘be gentle with your nervous system.’",
+      "This is permission to go slow without guilt. Healing isn’t a speed-run.",
+      "You can’t control everything, but you can choose effort, rest, and the next small step."
+    ];
+    document.getElementById("btnSanskrit").addEventListener("click", ()=>{
+      const x = pick(sanskritLines);
+      document.getElementById("sanskritOut").textContent = `${x.s}\n${x.e}`;
+    });
+    document.getElementById("btnMeaning").addEventListener("click", ()=>{
+      document.getElementById("sanskritOut").textContent =
+        pick(sanskritMeaning) + "\n\n(Not a command. Just a hand on your shoulder.)";
+    });
+
+    // Gentle roasts
+    const roasts = [
+      "Respectfully… you can’t intellectualize your way out of feelings. Even your brain knows that. 😌",
+      "You’re very ‘classic cinema’ about emotions — dramatic internal monologue, minimal dialogue. Iconic, but come up for air.",
+      "If you disappear into Vedic history again, I’m sending a Taco Bell delivery as a homing beacon.",
+      "You know 4000 years of mythology… and still forget you’re allowed to rest. Interesting.",
+    ];
+    const vijayRoasts = [
+      "Also: your girl (me) can love Vijay AND be correct. Both can happen.",
+      "Yes, I like Vijay. No, you cannot file a complaint. Please take it up with the universe.",
+      "You roasting my Vijay-love is fine. Me roasting you back is inevitable. Balance.",
+      "I accept your Vijay slander… as long as you accept my Taco Bell supremacy."
+    ];
+    document.getElementById("btnRoast").addEventListener("click", ()=>{
+      document.getElementById("roastOut").textContent = pick(roasts);
+    });
+    document.getElementById("btnVijay").addEventListener("click", ()=>{
+      document.getElementById("roastOut").textContent = pick(vijayRoasts);
+    });
+  </script>
+</body>
+</html>
